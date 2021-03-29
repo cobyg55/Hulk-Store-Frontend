@@ -1,0 +1,70 @@
+<div class="app-products">
+  <div class="image-cover" fxLayoutAlign="center center">
+    <img
+      src="https://prod-img.thesouledstore.com/public/theSoul/uploads/themes/20190731113825.jpg?w=1440&dpr=1.0"
+      alt=""
+    />
+  </div>
+  <span class="welcome-message" fxLayoutAlign="center center">Hulk Store!</span>
+  <mat-card style="text-align: center">
+    <button
+      mat-raised-button
+      style="background-color: rgb(82, 221, 82)"
+      (click)="showProductDialogForAddNew()"
+    >
+      <mat-icon>add_circle_outline</mat-icon>
+      New product
+    </button>
+  </mat-card>
+  <br />
+  <mat-grid-list  cols="3" rowHeight="600px">
+    <mat-grid-tile *ngFor="let product of products$ | async">
+      <mat-card style="width: 360px; height: 550px; margin-bottom: 10px;">
+        <mat-card-header>
+          <mat-card-title>
+            {{ product.description }}
+          </mat-card-title>
+        </mat-card-header>
+
+        <img
+          mat-card-image
+          [src]="product.photo"
+          alt="Product photo"
+          width="100%"
+          height="auto"
+        />
+        <mat-card-content>
+          <mat-list>
+            <span matLine> Amount: {{ product.amount }} </span>
+            <span matLine> Price {{ product.price | currency }} </span>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-icon-button
+            style="background-color: #004289"
+            (click)="showPurchaseDialog(product)"
+          >
+            <mat-icon style="color: white">shopping_cart</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            style="background-color: #f7c912"
+            (click)="showProductDialogForEdit(product)"
+          >
+            <mat-icon style="color: white">edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            style="background-color: #db1e25"
+            (click)="delete(product)"
+          >
+            <mat-icon style="color: white">delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
